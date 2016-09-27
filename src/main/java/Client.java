@@ -1,5 +1,3 @@
-import java.util.List;
-import java.util.Map;
 import java.util.NavigableMap;
 import java.util.Scanner;
 
@@ -14,19 +12,19 @@ public class Client {
     }
 
     public void productReader(){
+        System.out.println("To reset all type RESET");
         System.out.println("Input product name");
         Scanner sc=new Scanner(System.in);
-        String productName=sc.next();
+        String productName= inputElementAndCheckForReset().next();
 
         System.out.println("input amount");
-        int amount=sc.nextInt();
+        int amount=inputElementAndCheckForReset().nextInt();
         pos.addProduct(productName,amount);
     }
 
     public boolean coinReader(){
         System.out.println("input coin value");
-        Scanner sc=new Scanner(System.in);
-        int coinValue=sc.nextInt();
+        int coinValue= inputElementAndCheckForReset().nextInt();
         NavigableMap<Integer,Integer> changeCoinsMap=null;
         try{
             changeCoinsMap=pos.paymentProcess(coinValue);
@@ -46,13 +44,17 @@ public class Client {
         System.out.println("full price="+pos.getFullPrice());
     }
 
+    public Scanner inputElementAndCheckForReset(){
+        Scanner sc=new Scanner(System.in);
+        if(sc.next().equals("RESET")){
+            pos.reset();
+        }
+        return sc;
+    }
+
     private void printAllCoins(NavigableMap<Integer, Integer> changeCoinsMap) {
         for(Integer coinFromMapValue:changeCoinsMap.descendingKeySet()){
             System.out.println(coinFromMapValue+" coins amount:"+changeCoinsMap.get(coinFromMapValue));
         }
     }
-
-
-
-
 }
