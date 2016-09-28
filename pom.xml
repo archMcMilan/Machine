@@ -17,7 +17,7 @@
         </plugins>
     </build>
     <groupId>hometasks</groupId>
-    <artifactId>testingTasks</artifactId>
+    <artifactId>patternTasks</artifactId>
     <version>1.0-SNAPSHOT</version>
     <dependencies>
         <dependency>
