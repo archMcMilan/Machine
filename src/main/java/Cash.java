@@ -46,7 +46,8 @@ public class Cash {
         NavigableMap<Integer,Integer> outputCoins=new TreeMap<>();
         if(isChangeAvailable(value,outputCoins)){
             for(Integer coinValue:allCoins.descendingKeySet()){
-                allCoins.put(coinValue,allCoins.get(coinValue)-outputCoins.get(coinValue));
+                allCoins.merge(coinValue,outputCoins.get(coinValue)*(-1),Integer::sum);
+                //allCoins.put(coinValue,allCoins.get(coinValue)-outputCoins.get(coinValue));
             }
             return outputCoins;
         }
